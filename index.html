@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Password Generator</title>
+<script>
+  var generate = function(count) {
+    // https://qiita.com/delph/items/7786fadbf71ff45d8162
+
+    var letters = document.getElementById('letters').value;
+    var capitals = document.getElementById('capitals').value;
+    var numbers = document.getElementById('numbers').value;
+    var symbols = document.getElementById('symbols').value;
+    var length = parseInt(document.getElementById('length').value);
+    var list = document.getElementById('list');
+
+    // remove list
+    list.innerHTML = '';
+
+    var string = letters + capitals + numbers + symbols
+
+    for (var i = 0; i < count; i++) {
+      var password = '';
+
+      for (var l = 0; l < length; l++) {
+        password += string.charAt(Math.floor(Math.random() * string.length));
+        // charAt メソッドを用いて文字列から指定した文字を返す。
+      };
+
+      var li = document.createElement("li");
+      li.appendChild(document.createTextNode(password));
+      // li.setAttribute("id", "element4"); // added line
+      list.appendChild(li);
+    };
+
+  }
+</script>
+</head>
+<body>
+<div id="app">
+  <input type="text" id='letters' value='abcdefghijklmnopqrstuvwxyz'>
+  <input type="text" id='capitals' value='ABCDEFGHIJKLMNOPQRSTUVWXYZ'>
+  <input type="text" id='numbers' value='0123456789'>
+  <input type="text" id='symbols' value='!#$%&()'>
+  <input type="text" id='length' value='10'>
+  <br>
+  <button id='generate' onclick="generate(10)">
+    Generate
+  </button>
+  <ul id='list'></ul>
+</div>
+</body>
